@@ -437,7 +437,7 @@ def main():
             'best_epoch': history['best_epoch']
         }
         all_fold_results.append(fold_result)
-        
+        breakpoint()
         # 保存当前折的最佳模型
         torch.save(model.state_dict(), f'best_model_fold_{fold + 1}.pth')
         
