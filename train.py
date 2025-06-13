@@ -151,7 +151,7 @@ def update_history(history, train_metrics, val_metrics, train_loss, val_loss):
 
 def visualize_fold_results(history, fold_idx, save_dir):
     """可视化单折训练结果"""
-    matplotlib.rcParams['font.family'] = 'SimHei'
+    matplotlib.rcParams['font.family'] = 'sans-serif'
     matplotlib.rcParams['axes.unicode_minus'] = False
 
     plt.figure(figsize=(15, 10))
@@ -205,7 +205,7 @@ def visualize_fold_results(history, fold_idx, save_dir):
 
 def visualize_cv_results(all_fold_results, save_dir):
     """可视化五折交叉验证结果"""
-    matplotlib.rcParams['font.family'] = 'SimHei'
+    matplotlib.rcParams['font.family'] = 'sans-serif'
     matplotlib.rcParams['axes.unicode_minus'] = False
 
     # 1. 创建五折对比图
@@ -413,6 +413,8 @@ def main():
         print(f"训练集: {len(train_loader.dataset)}个样本, 验证集: {len(val_loader.dataset)}个样本")
         
         # 创建模型
+        # from mlp import MLP
+        # model = MLP(1800, 512, 2).to(device)
         model = CNN_GRU_KAN_Model(
             input_channels=18,
             seq_len=100,
@@ -437,7 +439,7 @@ def main():
             'best_epoch': history['best_epoch']
         }
         all_fold_results.append(fold_result)
-        breakpoint()
+
         # 保存当前折的最佳模型
         torch.save(model.state_dict(), f'best_model_fold_{fold + 1}.pth')
         
